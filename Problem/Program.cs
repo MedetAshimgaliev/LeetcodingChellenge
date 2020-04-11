@@ -222,6 +222,62 @@ namespace Problem
 
         }
 
+        public bool BackspaceCompare(string S, string T)
+        {
+            Stack<char> S1 = new Stack<char>();
+            Stack<char> S2 = new Stack<char>();
+
+            foreach(char c in S)
+            {
+                if (c != '#')
+                {
+                    S1.Push(c);
+                }
+                else
+                {
+                    if(S1.Count > 0)
+                    {
+                        S1.Pop();
+                    }
+                }
+            }
+
+            foreach(char c in T)
+            {
+                if(c != '#')
+                {
+                    S2.Push(c);
+                }
+                else
+                {
+                    if (S2.Count > 0)
+                    {
+                        S2.Pop();
+                    }
+                }
+            }
+
+            while(S1.Count > 0 && S2.Count > 0)
+            {
+                char c1 = S1.Peek();
+                S1.Pop();
+                char c2 = S2.Peek();
+                S2.Pop();
+
+                if (c1 != c2)
+                {
+                    return false;
+                }
+            }
+
+            if (S1.Count > 0 || S2.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
         static void Main(string[] args)
