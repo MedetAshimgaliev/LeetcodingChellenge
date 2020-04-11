@@ -7,6 +7,7 @@ namespace Problem
 {
     class Program
     {
+        #region First week
         public static int SingleNumber(int[] nums)
         {
             Array.Sort(nums);
@@ -194,6 +195,34 @@ namespace Problem
             return count;
 
         }
+
+        #endregion
+
+        #region Second Week
+
+        public class ListNode
+        {
+             public int val;
+             public ListNode next;
+             public ListNode(int x) { val = x; }
+        }
+
+        public ListNode MiddleNode(ListNode head)
+        {
+            ListNode a = head;
+            ListNode b = head;
+
+            while(b!=null && b.next != null)
+            {
+                a = a.next;
+                b = b.next.next;
+            }
+
+            return a;
+
+        }
+
+        #endregion
 
         static void Main(string[] args)
         {
