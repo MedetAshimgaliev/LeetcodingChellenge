@@ -278,12 +278,34 @@ namespace Problem
             return true;
         }
 
+        public static int FindMaxLength(int[] nums)
+        {
+            int[] arr = new int[(2 * nums.Length) + 1];
+            Array.Fill(arr, -2);
+            arr[nums.Length] = -1;
+            int maxlen = 0, count = 0;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                count = count + (nums[i] == 0 ? -1 : 1);
+                if (arr[count + nums.Length] >= -1)
+                {
+                    maxlen = Math.Max(maxlen, i - arr[count + nums.Length]);
+                }
+                else
+                {
+                    arr[count + nums.Length] = i;
+                }
+            }
+
+            return maxlen;
+        }
+
         #endregion
 
         static void Main(string[] args)
         {
-            int[] arr = new int[4] { 1, 1, 2, 2 };
-            Console.Write(countElements(arr));
+            int[] nums = new int[] { 0, 1, 0 };
+            Console.Write(FindMaxLength(nums));
         }
 
         
