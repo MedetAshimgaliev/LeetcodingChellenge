@@ -302,10 +302,183 @@ namespace Problem
 
         #endregion
 
+        public static long Factorial(int n)
+        {
+            if (n < 0)
+            {
+                return 0;
+            }
+            if (n == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return n * Factorial(n - 1);
+            }
+        }
+
+        public static long Fibb(int i)
+        {
+            if (i <= 2)
+            {
+                return 1;
+            }
+            else
+            {
+                return Fibb(i - 1) + Fibb(i - 2);
+            }
+        }
+
+        public static IList<int> Selection(int[] list)
+        {
+            for (int i = 0; i < list.Length - 1; i++)
+            {
+                int min = i;
+                for (int j = i + 1; j < list.Length; j++)
+                {
+                    if (list[j] < list[min])
+                    {
+                        min = j;
+                    }
+                }
+                int dummy = list[i];
+                list[i] = list[min];
+                list[min] = dummy;
+            }
+            return list;
+        }
+
+
+        public static int NumberOfSteps(int num)
+        {
+            int count = 0;
+            while (num > 0)
+            {
+                if (num % 2 == 0)
+                {
+                    num = num / 2;
+                    count++;
+                }
+                if (num % 2 == 1)
+                {
+                    num = num - 1;
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public static string DefangIPaddr(string address)
+        {
+            string result = "";
+            for(int i = 0; i < address.Length; i++)
+            {
+                if (address[i] == '.')
+                {
+                    result += "[.]";
+                }
+                else
+                {
+                    result = result + address[i];
+                }
+            }
+            return result;
+        }
+
+        public static int[] SmallerNumbersThanCurrent(int[] nums)
+        {
+            int[] result = new int[nums.Length];
+
+            int increment = 0;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                int counter = 0;
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (nums[i] > nums[j])
+                    {
+                        counter++;
+                    }
+                }
+                result[increment++] = counter;
+            }
+
+            return result;
+        }
+
+        public static int SubtractProductAndSum(int n)
+        { 
+            return getProd(n) - getSum(n) ;
+        }
+
+        public static int getSum(int n)
+        {
+            int sum = 0;
+            while (n > 0)
+            {
+                sum = sum + n % 10;
+                n = n / 10;
+            }
+            return sum;
+        }
+
+        public static int getProd(int n)
+        {
+            int prod = 1;
+            while (n > 0)
+            {
+                prod = prod * (n % 10);
+                n = n / 10;
+            }
+
+            return prod;
+        }
+
+        public static int FindNumbers(int[] nums)
+        {
+            int result = 0;
+
+            List<int> cntHolder = new List<int>();
+
+            for(int i=0; i < nums.Length; i++)
+            {
+                cntHolder.Add(countDigit(nums[i]));   
+            }
+
+            foreach(int c in cntHolder)
+            {
+                if (c % 2 == 0)
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
+        public static int countDigit(long n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                n = n / 10;
+                ++count;
+            }
+            return count;
+        }
+
         static void Main(string[] args)
         {
-            int[] nums = new int[] { 0, 1, 0 };
-            Console.Write(FindMaxLength(nums));
+            
+            int[] nums = new int[] { 555, 901, 482, 1771 };
+
+            //foreach (int item in SmallerNumbersThanCurrent(nums))
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            Console.WriteLine(FindNumbers(nums));
         }
 
         
