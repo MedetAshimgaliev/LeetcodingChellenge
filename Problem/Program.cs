@@ -468,17 +468,47 @@ namespace Problem
             return count;
         }
 
+        public static int[] CreateTargetArray(int[] nums, int[] index)
+        {
+            int[] result = null;
+            for (int i = 0; i < nums.Length; ++i)
+            {
+                result = InsertIntoArray(result, nums[i], index[i]);
+            }
+            return result;
+        }
+
+        private static int[] InsertIntoArray(int[] arr, int val, int index)
+        {
+            if (arr == null)
+                return new int[] { val };
+
+            int[] tmp = new int[arr.Length + 1];
+            for (int i = 0; i < tmp.Length; ++i)
+            {
+                if (i < index)
+                    tmp[i] = arr[i];
+                else if (i == index)
+                    tmp[i] = val;
+                else
+                    tmp[i] = arr[i - 1];
+            }
+            return tmp;
+        }
+
+
         static void Main(string[] args)
         {
-            
-            int[] nums = new int[] { 555, 901, 482, 1771 };
 
-            //foreach (int item in SmallerNumbersThanCurrent(nums))
+            int[] nums = new int[] { 0, 1, 2, 3, 4 };
+            int[] index = new int[] { 0, 1, 2, 2, 1 };
+
+            //foreach (int item in CreateTargetArray(nums,index))
             //{
             //    Console.WriteLine(item);
             //}
 
-            Console.WriteLine(FindNumbers(nums));
+            Console.WriteLine(String.Join(",", CreateTargetArray(nums,index)));
         }
 
         
