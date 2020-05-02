@@ -496,6 +496,22 @@ namespace Problem
             return tmp;
         }
 
+        public static int NumJewelsInStones(string J, string S)
+        {
+            int count = 0;
+            for(int i = 0; i < J.Length; i++)
+            {
+                for(int h = 0; h < S.Length; h++)
+                {
+                    if (J[i] == S[h])
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
 
         static void Main(string[] args)
         {
@@ -508,7 +524,8 @@ namespace Problem
             //    Console.WriteLine(item);
             //}
 
-            Console.WriteLine(String.Join(",", CreateTargetArray(nums,index)));
+            //Console.WriteLine(String.Join(",", CreateTargetArray(nums,index)));
+            Console.Write(NumJewelsInStones("z", "ZZ"));
         }
 
         
