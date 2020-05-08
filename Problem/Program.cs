@@ -513,19 +513,169 @@ namespace Problem
         }
 
 
+        public static bool CanConstruct(string ransomNote, string magazine)
+        {
+            Dictionary<char, int> table = new Dictionary<char, int>();
+            foreach (char ch in ransomNote)
+            {
+                if (table.ContainsKey(ch))
+                    table[ch]++;
+                else
+                    table.Add(ch, 1);
+            }
+
+            foreach (char ch in magazine)
+            {
+                if (table.ContainsKey(ch))
+                    table[ch]--;
+            }
+
+            foreach (char key in table.Keys)
+            {
+                if (table[key] > 0) return false;
+            }
+
+            return true;
+        }
+
+        public static int MajorityElement(int[] nums)
+        {
+            // Sort the array 
+            Array.Sort(nums);
+
+            // find the max frequency using  
+            // linear traversal 
+            int max_count = 1, res = nums[0];
+            int curr_count = 1;
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == nums[i - 1])
+                    curr_count++;
+                else
+                {
+                    if (curr_count > max_count)
+                    {
+                        max_count = curr_count;
+                        res = nums[i - 1];
+                    }
+                    curr_count = 1;
+                }
+            }
+
+            // If last element is most frequent 
+            if (curr_count > max_count)
+            {
+                max_count = curr_count;
+                res = nums[nums.Length - 1];
+            }
+
+            return res;
+
+        }
+
+        public static int FirstUniqChar(string s)
+        {
+            for(int i = 0; i < s.Length - 1; i++)
+            {
+                for(int j = i + 1; j < s.Length - 1; j++)
+                {
+                    
+                }
+            }
+            return 0;
+        }
+
+        public static int FindMaxConsercutiveOnes(int[] nums)
+        {
+            int count = 0;
+            int max = 0;
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 1)
+                {
+                    count++;
+                }
+                else
+                {
+                    max = Math.Max(max, count);
+                    count = 0;
+                }
+            }
+
+            return Math.Max(max, count);
+        }
+
+        public static int[] SortedSquares(int[] A)
+        {
+            int[] result = new int[A.Length];
+
+            for(int i = 0; i < A.Length ; i++)
+            {
+                result[i] = A[i] * A[i];
+            }
+
+            Array.Sort(result);
+            return result;
+        }
+
+        public static void DuplicateZeros(int[] arr)
+        {
+            for(int i = 0; i < arr.Length-1;)
+            {
+                if (arr[i] == 0)
+                {
+                    for(int j = arr.Length-1; j > i; j--)
+                    {
+                        arr[j] = arr[j - 1];
+                    }
+                    i = i + 2;
+                }
+                else
+                {
+                    i = i + 1;
+                }
+            }
+        }
+
+        public static void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+
+
+            
+            for (int i = m; i <= nums1.Length - 1; i++)
+            {
+                nums1[i] = nums2[i-m];
+            }
+            
+
+            Array.Sort(nums1);
+            
+        }
+
+
         static void Main(string[] args)
         {
 
-            int[] nums = new int[] { 0, 1, 2, 3, 4 };
-            int[] index = new int[] { 0, 1, 2, 2, 1 };
+            int[] nums1 = new int[] { -1, 0, 0, 3, 3, 3, 0, 0, 0 };
+            int[] nums2 = new int[] { 1,2,2 };
 
             //foreach (int item in CreateTargetArray(nums,index))
             //{
             //    Console.WriteLine(item);
             //}
 
-            //Console.WriteLine(String.Join(",", CreateTargetArray(nums,index)));
-            Console.Write(NumJewelsInStones("z", "ZZ"));
+            //Console.WriteLine(FirstUniqChar("loveleetcode"));
+
+            Merge(nums1, 6, nums2, 3);
+
+            foreach(int c in nums1)
+            {
+                Console.WriteLine(c);
+            }
+            
+
         }
 
         
