@@ -654,12 +654,71 @@ namespace Problem
             
         }
 
+        public static int RemoveElement(int[] nums, int val)
+        {
+            if (nums.Length == 0)
+            {
+                return 0;
+            }
+
+            int new_begin = 0;
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != val)
+                {
+                    nums[new_begin] = nums[i];
+                    new_begin++;
+                }
+            }
+
+            return new_begin;
+        }
+
+        public static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length == 0)
+            {
+                return 0;
+            }
+
+            int i = 0;
+            for(int j = 0; j < nums.Length; j++)
+            {
+                if(nums[j] != nums[i])
+                {
+                    i++;
+                    nums[i] = nums[j];
+                }
+            }
+
+            return i + 1;
+        }
+
+        public static bool CheckIfExist(int[] arr)
+        {
+            if (arr.Length == 0 || arr == null)
+            {
+                return false;
+            }
+
+            HashSet<int> set = new HashSet<int>();
+            foreach (int num in arr)
+            {
+                if (set.Contains(num * 2) || (num % 2 == 0 && set.Contains(num / 2)))
+                {
+                    return true;
+                }
+                set.Add(num);
+            }
+            return false;
+        }
 
         static void Main(string[] args)
         {
 
-            int[] nums1 = new int[] { -1, 0, 0, 3, 3, 3, 0, 0, 0 };
-            int[] nums2 = new int[] { 1,2,2 };
+            //int[] nums = new int[] { 0, 1, 2, 2, 3, 0, 4, 2 };
+            int[] nums2 = new int[] { 0,0 };
 
             //foreach (int item in CreateTargetArray(nums,index))
             //{
@@ -668,12 +727,9 @@ namespace Problem
 
             //Console.WriteLine(FirstUniqChar("loveleetcode"));
 
-            Merge(nums1, 6, nums2, 3);
+            Console.WriteLine(CheckIfExist(nums2));
 
-            foreach(int c in nums1)
-            {
-                Console.WriteLine(c);
-            }
+            
             
 
         }
