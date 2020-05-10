@@ -714,11 +714,174 @@ namespace Problem
             return false;
         }
 
+        public static bool ValidMountainArray(int[] A)
+        {
+            int i = 0;
+            
+            while (A[i] < A[i + 1] && i+1 < A.Length)
+                i++;
+
+            if (i == 0 || i == A.Length - 1)
+            {
+                return false;
+            }
+
+            while (A[i] > A[i + 1] && i < A.Length)
+                i++;
+
+            return i == A.Length;
+        }
+
+        public static int[] ReplaceElements(int[] arr)
+        {            
+            for(int i = 0; i < arr.Length; i++)
+            {
+                if (i == arr.Length - 1)
+                {
+                    arr[i] = -1;
+                }
+                else
+                {
+                    int max = int.MinValue;
+                    for (int j = i + 1; j < arr.Length; j++)
+                    {
+                        if (arr[j] > max)
+                        {
+                            max = arr[j];
+                        }
+                    }
+                    arr[i] = max;
+                }
+                
+                
+            }
+
+
+            return arr;
+        }
+
+        public static int[] SortArrayByParity(int[] A)
+        {
+            int start = 0;
+            for(int i = 0; i < A.Length; i++)
+            {
+                if (A[i] % 2 == 0)
+                {
+                    int temp = A[start];
+                    A[start]=A[i];
+                    A[i] = temp;
+                    start++;
+                }
+            }
+
+
+            return A;
+        }
+
+        public static int[] SortedSquares2(int[] A)
+        {
+            for(int i = 0; i < A.Length; i++)
+            {
+                A[i] = A[i] * A[i];
+            }
+            Array.Sort(A);
+
+            return A;
+        }
+
+        public static int HeightChecker(int[] heights)
+        {
+            int[] initial = new int[heights.Length];
+
+            for(int i = 0; i < initial.Length; i++)
+            {
+                initial[i] = heights[i];
+            }
+
+            Array.Sort(heights);
+
+            int count = 0;
+
+            for(int i = 0; i < initial.Length; i++)
+            {
+                if (initial[i] != heights[i])
+                {
+                    count++;
+                }
+            }
+
+
+
+            return count;
+        }
+
+        public static int? ThirdMax(int[] nums)
+        {
+            int? max = null;
+            int? max2 = null;
+            int? max3 = null;
+
+            foreach (int num in nums)
+            {
+                if (num == max || num == max2 || num == max3)
+                {
+                    continue;
+                }
+
+                if(max==null || num > max)
+                {
+                    max3 = max2;
+                    max2 = max;
+                    max = num;
+                }
+
+                else if (max2 == null || num > max2)
+                {
+                    max3 = max2;
+                    max2= num;
+                }
+
+                else if (max3 == null || num > max3)
+                {
+                    max3 = num;
+                }
+            }
+
+
+            if (max3 == null)
+            {
+                return max;
+            }
+
+            return max3;
+
+        }
+
+        public static IList<int> FindDisappearedNumbers(int[] nums)
+        {
+            List<int> ans = new List<int>();
+            ISet<int> rangeSet = new HashSet<int>();
+
+
+            ISet<int> numSet = new HashSet<int>();
+
+            for (int i = 1; i <= nums.Length; i++)
+                rangeSet.Add(i);
+            foreach (int num in nums)
+                numSet.Add(num);
+
+            foreach (int n in rangeSet)
+                if (!numSet.Contains(n))
+                    ans.Add(n);
+            return ans;
+
+        }
+
         static void Main(string[] args)
         {
 
             //int[] nums = new int[] { 0, 1, 2, 2, 3, 0, 4, 2 };
-            int[] nums2 = new int[] { 0,0 };
+            int[] nums2 = new int[] { 2, 2, 3, 1 };
 
             //foreach (int item in CreateTargetArray(nums,index))
             //{
@@ -727,8 +890,20 @@ namespace Problem
 
             //Console.WriteLine(FirstUniqChar("loveleetcode"));
 
-            Console.WriteLine(CheckIfExist(nums2));
+            //foreach(int c in SortedSquares2(nums2))
+            //{
+            //    Console.WriteLine(c);
+            //}
 
+            //Console.WriteLine(HeightChecker(nums2));
+
+            //foreach(int c in FindDisappearedNumbers(nums2))
+            //{
+            //    Console.WriteLine(c);
+            //}
+
+
+            Console.WriteLine(ThirdMax(nums2));
             
             
 
