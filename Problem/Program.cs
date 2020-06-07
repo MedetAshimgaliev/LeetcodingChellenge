@@ -574,17 +574,7 @@ namespace Problem
 
         }
 
-        public static int FirstUniqChar(string s)
-        {
-            for(int i = 0; i < s.Length - 1; i++)
-            {
-                for(int j = i + 1; j < s.Length - 1; j++)
-                {
-                    
-                }
-            }
-            return 0;
-        }
+       
 
         public static int FindMaxConsercutiveOnes(int[] nums)
         {
@@ -877,35 +867,440 @@ namespace Problem
 
         }
 
-        static void Main(string[] args)
+        public static void Rotate(int[] nums, int k)
         {
 
-            //int[] nums = new int[] { 0, 1, 2, 2, 3, 0, 4, 2 };
-            int[] nums2 = new int[] { 2, 2, 3, 1 };
+            foreach (int num in nums)
+            {
+                Console.WriteLine(num);
+            }
 
-            //foreach (int item in CreateTargetArray(nums,index))
-            //{
-            //    Console.WriteLine(item);
-            //}
+        }
 
-            //Console.WriteLine(FirstUniqChar("loveleetcode"));
-
-            //foreach(int c in SortedSquares2(nums2))
-            //{
-            //    Console.WriteLine(c);
-            //}
-
-            //Console.WriteLine(HeightChecker(nums2));
-
-            //foreach(int c in FindDisappearedNumbers(nums2))
-            //{
-            //    Console.WriteLine(c);
-            //}
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            Array.Sort(nums);
+            for(int i = 0; i < nums.Length-1; i++)
+            {
+                if(nums[i] == nums[i + 1])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
-            Console.WriteLine(ThirdMax(nums2));
+        public static void ReverseString(char[] s)
+        {
+
+            int start = 0;
+            int end = s.Length - 1;
+
+            while(start < end)
+            {
+                char temp = s[start];
+                s[start] = s[end];
+                s[end] = temp;
+                start++;
+                end--;
+            }
+
+
+            foreach(char c in s)
+            {
+                Console.WriteLine(c);
+            }
+
+        }
+
+        public static IList<string> FizzBuzz(int n)
+        {
+            IList<string> result = new List<string>();
+
+            for(int i = 1; i <= n; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    result.Add("FizzBuzz");
+                }
+                else if (i % 3 == 0)
+                {
+                    result.Add("Fizz");
+                }
+                else if (i % 5 == 0)
+                {
+                    result.Add("Buzz");
+                }
+                else
+                {
+                    result.Add(i.ToString());
+                }
+
+            }
+
+            return result;
+        }
+
+        public static bool IsAnagram(string s, string t)
+        {
+            if(s.Length != t.Length)
+            {
+                return true;
+            }
+
+            int[] char_count = new int[26];
+
+            for(int i = 0; i < s.Length; i++)
+            {
+                char_count[s[i]-'a']++;
+                char_count[t[i]-'a']--;
+            }
+
+            foreach(int count in char_count)
+            {
+                if (count != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
+
+        public static IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+        {
+            IList<bool> result = new List<bool>();
+
+            int max = candies.Max();
+
+            foreach(int child in candies)
+            {
+                if(child + extraCandies >= max)
+                {
+                    result.Add(true);
+                }
+                else
+                {
+                    result.Add(false);
+                }
+            }
+
+            return result;
+        }
+
+        public static bool UniqueOccurrences(int[] arr)
+        {
+            Dictionary<int, int> ht = new Dictionary<int, int>();
+
+            foreach (int c in arr)
+            {
+                if (ht.ContainsKey(c))
+                {
+                    ht[c] = ht[c]+1;
+                }
+                else
+                {
+                    ht.Add(c, 1);
+                }
+            }
+
+            if (ht.Values.Distinct().Count() == ht.Values.Count())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static void checkMagazine(string[] magazine, string[] note)
+        {
+            Dictionary<string, int> ht = new Dictionary<string, int>();
+            foreach(string word in magazine)
+            {
+                if (ht.ContainsKey(word))
+                {
+                    ht[word] = ht[word] + 1;
+                }
+                else
+                {
+                    ht.Add(word, 1);
+                }
+
+                foreach(string item in note)
+                {
+                    if(ht.ContainsKey(item))
+                    {
+                        ht[item] = ht[item] - 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No");
+                        break;
+                    }
+                }
+                Console.WriteLine("Yes");
+            }
+
+        }
+
+        public static IList<string> SubdomainVisits(string[] cpdomains)
+        {
+            IList<string> result = new List<string>();
+
+            Dictionary<int, string> ht = new Dictionary<int, string>();
+
+            foreach(string c in cpdomains)
+            {
+                int count = Int32.Parse(c.Split(" ")[0]);
+                string mainDomain = c.Split(" ")[1];
+                ht.Add(count, mainDomain);
+                if(mainDomain.Split(".").Length > 2)
+                {
+                    foreach (char subdom in mainDomain)
+                    {
+
+                    }
+                }
+            }
+
+
+            return result;
+        }
+
+        public static void bonAppetit(List<int> bill, int k, int b)
+        {
+            int total = 0;
+            foreach(int c in bill)
+            {
+                total += c;
+            }
+
+            int decline = (total - bill[k])/2;
+
+            Console.WriteLine(total / 2 - decline);
+
+        }
+
+
+        public static int getMoneySpent(int[] keyboards, int[] drives, int b)
+        {
+            int currentMax = -1;
+
+            foreach(int c in keyboards)
+            {
+                foreach(int d in drives)
+                {
+                    if(c+d<=b && c + d > currentMax)
+                    {
+                        currentMax = c + d;
+                    }
+                }
+            }
+
+            return currentMax;
+
+
+        }
+
+        public static int hurdleRace(int k, int[] height)
+        {
+            Array.Sort(height);
+
+            if (height.All(x => x < k))
+            {
+                return 0;
+            }
+            else
+            {
+                return height[height.Length-1] - k;
+            }
+
+
+        }
+
+        public static int utopianTree(int n)
+        {
+            int heigth = 0;
+            for(int i = 0; i < n+1; i++)
+            {
+                if (i % 2 == 1)
+                {
+                    heigth = heigth * 2;
+                }
+                else
+                {
+                    heigth += 1;
+                }
+            }
             
+            return heigth;
+        }
+
+
+        static string angryProfessor(int k, int[] a)
+        {
+            return ((Array.FindAll(a, x => x <= 0)).Length >= k ? "NO" : "YES");
+
+        }
+
+        public static int ReverseInt(int num)
+        {
+            int result = 0;
+            while (num > 0)
+            {
+                result = result * 10 + num % 10;
+                num /= 10;
+            }
+            return result;
+        }
+
+        public static int beautifulDays(int i, int j, int k)
+        {
+            List<double> list = new List<double>();
+            for(int number = i; number <= j; number++)
+            {
+                //list.Add(Math.Abs((number - ReverseInt(number)) / k));
+                if (Math.Abs(number - ReverseInt(number)) % k == 0)
+                {
+                    list.Add(Math.Abs(number - ReverseInt(number))/k);
+                }
+            }
+            return list.Count();
+        }
+
+        public static int viralAdvertising(int n)
+        {
+
+            int shared = 5;
+            int liked = 0;
+            int cum = 0;
+
+
+            for (int i = 1; i <= n; i++)
+            {
+                liked = (shared / 2);
+                shared = (shared / 2) * 3;
+                cum += liked;
+                
+            }
+
+            return cum;
+        }
+
+        public static int squares(int a, int b)
+        {
+            int start = (int)Math.Sqrt(a);
+            int end = (int)Math.Sqrt(b);
+
+            int dif = end - start;
+
+            dif += (Math.Pow(start, 2) >= a) ? 1 : 0;
+            return dif;
+        }
+
+        public static int equalizeArray(int[] arr)
+        {
+            Dictionary<int, int> ht = new Dictionary<int, int>();
+
+            foreach(int c in arr)
+            {
+                if (ht.ContainsKey(c))
+                {
+                    ht[c] = ht[c] + 1;
+                }
+                else
+                {
+                    ht.Add(c, 1);
+                }
+            }
+
+            return arr.Length-ht.Values.Max();
+        }
+
+        public static int findDigits(int n)
+        {
+            string nStr = n.ToString();
+            int count = 0;
+            foreach (char c in nStr.ToCharArray())
+            {
+                if (c == '0')
+                    continue;
+                int rem = n % (c - '0');
+                if (rem == 0)
+                    count++;
+            }
+            return count;
+        }
+
+        public static int libraryFine(int d1, int m1, int y1, int d2, int m2, int y2)
+        {
+            if (y2 < y1)
+            {
+                return 10000;
+            }
+            if (y1 < y2)
+            {
+                return 0;
+            }
+            if (m2 < m1)
+            {
+                return (m1 - m2) * 500; 
+            }
+            if (d1>d2)
+            {
+                return 15 * (d1 - d2);
+            }
+            return 0;
+        }
+
+        // 9 6 2015
+        // 6 6 2015
+
+            // 45
+
+
+        static void Main(string[] args)
+        {
+            // 1 1 2 2 3 3 3 3
+            // 
+
+            string[] magazine = new string[] { "two", "times", "three", "is", "not", "four" };
+            string[] note = new string[] { "two", "times", "two", "is", "four" };
+
+
             
+            //int[] nums = new int[] { 2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19 };
+            int[] keyboards = new int[] { 3,1 };
+            int[] drives = new int[] { 1, 2, 3, 4, 3, 3, 2, 1 };
+
+            //Console.WriteLine(utopianTree(5));
+            Console.WriteLine(libraryFine(2,7,1014,1,1,1015));
+
+            string[] cpdomains = new string[] { "9001 discuss.leetcode.com" };
+
+            
+
+            //Console.Write(cpdomains[0].Split(" ")[0]);
+
+            //Console.WriteLine(SubdomainVisits(cpdomains));
+
+            
+
+            //foreach(string str in FizzBuzz(15))
+            //{
+            //    Console.WriteLine(str);
+            //}
+            //Console.WriteLine(ContainsDuplicate(nums));
+
+
+
+
+
+
+
+
 
         }
 
